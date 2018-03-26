@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>FRC Team 7127 (LongMetal Robotics) Scouting</title>
+    <link rel="stylesheet" href="res/main.css">
+    <script src="res/js/main.js"></script>
+    <!--Google Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Lato|Roboto" rel="stylesheet">
+    <!--Firebase boilerplate-->
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+    <script>
+      function firebaseInit() {
+        // Initialize Firebase
+        var config = {
+          apiKey: "AIzaSyApKpqihGa0lJJN4WaDPafHtWNPLYxUXgg",
+          authDomain: "frc-team-7127-scouting.firebaseapp.com",
+          databaseURL: "https://frc-team-7127-scouting.firebaseio.com",
+          projectId: "frc-team-7127-scouting",
+          storageBucket: "frc-team-7127-scouting.appspot.com",
+          messagingSenderId: "881060266081"
+        };
+
+        firebase.initializeApp({
+          apiKey: "AIzaSyApKpqihGa0lJJN4WaDPafHtWNPLYxUXgg",
+          authDomain: "frc-team-7127-scouting.firebaseapp.com",
+          databaseURL: "https://frc-team-7127-scouting.firebaseio.com",
+          projectId: "frc-team-7127-scouting",
+          storageBucket: "frc-team-7127-scouting.appspot.com",
+          messagingSenderId: "881060266081"
+        });
+      }
+    </script>
+  </head>
+  <body onload="updateResponses()">
+    <form>
+      <table class="statusBar">
+        <tr>
+          <td class="title">
+            <h2 class="statusTitle">LongMetal Scouting</h2>
+          </td>
+          <td class="submit">
+            <a class="submitButton" id="submitButton">SUBMIT</a>
+          </td>
+        </tr>
+      </table>
+      <br>
+      <table>
+        <tr>
+          <td>
+            <h2>General</h2>
+            <h3>Team Number: </h3>
+            <input type="number" name="general-teamNumber" min="1" max="7331">
+            <h3>Team Name: </h3>
+            <input type="text" name="general-teamName">
+            <h3>Matches Against: </h3>
+            <input type="text" name="general-matchesAgainst" placeholder="None">
+            <h3>Matches Together: </h3>
+            <input type="text" name="general-matchesTogether" placeholder="None">
+            <h3>Rookie Year: </h3>
+            <input type="number" name="general-rookieYear" min="1997" max="2018">
+          </td>
+          <td>
+            <h2>Autonomous</h2>
+            <h3>Remarks: </h3>
+            <textarea name="autonomous-remarks" placeholder="None" cols="20" rows="5"></textarea>
+          </td>
+          <td>
+            <h2>Scale</h2>
+            <h3>Possible: </h3>
+            <input type="radio" name="scale-possible" value="Yes"> <b>Yes</b> <br>
+            <input type="radio" name="scale-possible" value="No"> <b>No</b>
+            <h3>Remarks: </h3>
+            <textarea name="scale-remarks" placeholder="None" cols="20" rows="5"></textarea>
+          </td>
+          <td>
+            <h2>Climb</h2>
+            <h3>Possible: </h3>
+            <input type="radio" name="climb-possible" value="Yes"> <b>Yes</b> <br>
+            <input type="radio" name="climb-possible" value="No"> <b>No</b>
+            <h3>Remarks: </h3>
+            <textarea name="climb-remarks" placeholder="None" cols="20" rows="5"></textarea>
+          </td>
+          <td>
+            <h2>Switch</h2>
+            <h3>Possible: </h3>
+            <input type="radio" name="switch-possible" value="Yes"> <b>Yes</b> <br>
+            <input type="radio" name="switch-possible" value="No"> <b>No</b>
+            <h3>Remarks: </h3>
+            <textarea name="switch-remarks" placeholder="None" cols="20" rows="5"></textarea>
+          </td>
+          <td>
+            <h2>Exchange</h2>
+            <h3>Possible: </h3>
+            <input type="radio" name="exchange-possible" value="Yes"> <b>Yes</b> <br>
+            <input type="radio" name="exchange-possible" value="No"> <b>No</b>
+            <h3>Remarks: </h3>
+            <textarea name="exchange-remarks" placeholder="None" cols="20" rows="5"></textarea>
+          </td>
+          <td>
+            <h2>Overall</h2>
+            <h3>Rating (1-4): </h3>
+            <input type="number" name="overall-rating" min="1" max="4">
+            <h3>Remarks: </h3>
+            <textarea name="overall-remarks" placeholder="None" cols="20" rows="5"></textarea>
+          </td>
+        </tr>
+      </table>
+    </form>
+    <script>
+      var responses = [];
+      document.getElementById("submitButton").addEventListener('click', firebaseUpload);
+      var teamNumber = document.getElementsByName("general-teamNumber")[0].value;
+      var teamName = document.getElementsByName("general-teamName")[0].value;
+      var matchesAgainst = document.getElementsByName("general-matchesAgainst")[0].value;
+      var matchesTogether = document.getElementsByName("general-matchesTogether")[0].value;
+      var rookieYear = document.getElementsByName("general-rookieYear")[0].value;
+      var autonomousRemarks = document.getElementsByName("autonomous-remarks")[0].value;
+      var scalePossible1Checked = document.getElementsByName("scale-possible")[0].checked;
+      var scaleRemarks = document.getElementsByName("scale-remarks")[0].value;
+      var climbPossible1Checked = document.getElementsByName("climb-possible")[0].checked;
+      var climbRemarks = document.getElementsByName("climb-remarks")[0].value;
+      var switchPossible1Checked = document.getElementsByName("switch-possible")[0].checked;
+      var switchRemarks = document.getElementsByName("switch-remarks")[0].value;
+      var exchangePossible1Checked = document.getElementsByName("exchange-possible")[0].checked;
+      var exchangeRemarks = document.getElementsByName("exchange-remarks")[0].value;
+      var overallRating = document.getElementsByName("overall-rating")[0].value;
+      var overallRemarks = document.getElementsByName("overall-remarks")[0].value;
+      firebaseInit();
+    </script>
+  </body>
+</html>

@@ -1,9 +1,10 @@
+
 function updateResponses() {
   teamNumber = document.getElementsByName("general-teamNumber")[0].value;
   teamName = document.getElementsByName("general-teamName")[0].value;
   matchesAgainst = document.getElementsByName("general-matchesAgainst")[0].value;
   matchesTogether = document.getElementsByName("general-matchesTogether")[0].value;
-  rookieYear = document.getElementsByName("general-rookieYear")[0].value;
+  rookieYear = document.getElementsByName('general-rookieYear')[0].value;
   autonomousRemarks = document.getElementsByName("autonomous-remarks")[0].value;
   scalePossible1Checked = document.getElementsByName("scale-possible")[0].checked;
   scaleRemarks = document.getElementsByName("scale-remarks")[0].value;
@@ -56,11 +57,31 @@ function updateResponses() {
     overallRemarks = "None";
   }
   responses = [teamNumber, teamName, matchesAgainst, matchesTogether, rookieYear, autonomousRemarks, scalePossible1Checked, scaleRemarks, climbPossible1Checked, climbRemarks, switchPossible1Checked, switchRemarks, exchangePossible1Checked, exchangeRemarks, overallRating, overallRemarks];
+  document.getElementsByClassName("statusBar")[0].style.width = window.innerWidth + "px";
+  if (window.innerWidth < window.innerHeight && errored == false) {
+    if (document.getElementsByClassName('spacer')[0].innerHTML != "<br><br>") {
+      document.getElementsByClassName('spacer')[0].innerHTML = "<br><br>";
+    }
+    document.getElementById('errorMessage').innerHTML = "This page works better in landscape mode.";
+  } else if (window.innerWidth > window.innerHeight && errored == false) {
+    if (document.getElementsByClassName('spacer')[0].innerHTML != "<br>") {
+      document.getElementsByClassName('spacer')[0].innerHTML = "<br>";
+    }
+    document.getElementById('errorMessage').innerHTML = "";
+  }
+  document.getElementsByClassName('spacer')[1].style.height = (window.innerHeight - document.getElementsByTagName('form')[0].offsetHeight) + "px";
+  document.getElementsByClassName('scoutedTitle')[0].style.width = document.getElementsByTagName('table')[2].offsetWidth + "px";
   setTimeout(updateResponses, 100);
 }
 
 function firebaseUpload() {
   if (teamNumber != "" && teamName != "") {
+    var scoutedTeams;
+    firebase.database().ref('/scoutedTeams/').once('value').then(function(snapshot) {
+      scoutedTeams = snapshot.val();
+      scoutedTeams[scoutedTeams.length] = teamNumber;
+      firebase.database().ref('/scoutedTeams/').set(scoutedTeams);
+    });
     firebase.database().ref(teamNumber).set({
       'General': {
         'matchesAgainst': matchesAgainst,
@@ -98,8 +119,8 @@ function firebaseUpload() {
       document.getElementsByTagName('input')[i].value = "";
       document.getElementsByTagName('input')[i].checked = false;
     }
-    for (var i = 0; i < document.getElementsByTagName('textarea').length; i++) {
-      document.getElementsByTagName('textarea').value = "";
+    for (var j = 0; j < document.getElementsByTagName('textarea').length; j++) {
+      document.getElementsByTagName('textarea')[j].value = "";
     }
   } else {
     var reqdFields = "";
@@ -113,14 +134,19 @@ function firebaseUpload() {
       reqdFields = "Team Name";
     }
     setTimeout(resetPage, 3000);
+    errored = true;
     document.getElementsByClassName('statusBar')[0].style.backgroundColor = "#F44336";
     document.getElementById('submitButton').innerHTML = "ERROR";
-    console.log('Firebase Upload Failed: Fields ' + reqdFields + ' were not completed.');
-    alert("The following fields must be completed:\n" + reqdFields);
+    console.warn('Firebase Upload Failed: Fields ' + reqdFields + ' were not completed.');
+    document.getElementsByClassName('spacer')[0].innerHTML = "<br><br>";
+    document.getElementById('errorMessage').innerHTML = "The following fields must be completed: " + reqdFields;
   }
 }
 
 function resetPage() {
+  errored = false;
   document.getElementsByClassName('statusBar')[0].style.backgroundColor = "#2196F3";
   document.getElementById('submitButton').innerHTML = "SUBMIT";
+  document.getElementsByClassName('spacer')[0].innerHTML = "<br>";
+  document.getElementById('errorMessage').innerHTML = "";
 }

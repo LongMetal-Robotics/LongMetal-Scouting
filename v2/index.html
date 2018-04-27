@@ -1,1 +1,105 @@
-
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>FRC Team 7127 Scouting</title>
+    <link rel="stylesheet" href="res/main.css"> <!-- Main stylesheet -->
+    <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans" rel="stylesheet"> <!-- Google Fonts import- Open Sans and Lato -->
+    <script type="text/javascript" src="res/js/smoothAdvance.js"></script>
+  </head>
+  <body>
+    <div class="titleBar">
+      <h1>LongMetal Scouting</h1>
+    </div>
+    <div class="spacer" id="abovePage">&nbsp;</div>
+    <div class="pageContent">
+      <div class="formPage" id="pg1">
+        <!-- General
+          Team Name [__________]
+          Team Number [____]
+          Rookie Year [____]
+          Matches Together  [__________]
+          Matches Against [__________]
+        -->
+        <h2>General</h2><br>
+        <span>Team Name:</span><br>
+        <input type="text" name="general-teamName"><br><br>
+        <span>Team Number:</span><br>
+        <input type="number" name="general-teamNumber" min="1" max="7384"><br><br>
+        <span>Rookie Year:</span><br>
+        <input type="number" name="general-rookieYear" min="1995" max="2019"><br><br>
+        <span>Matches Together:</span><br>
+        <input type="text" name="general-matchesTogether"><br><br>
+        <span>Matches Against:</span><br>
+        <input type="text" name="general-matchesAgainst">
+        <br>
+        <button class="nextPage" onclick="nextSection(window.innerWidth);" style="position: absolute; right: -2px; border-top-left-radius: 6px;"><span>Next</span></button>
+      </div>
+      <div class="formPage" id="pg2">
+        <!-- Autonomous
+        -->
+        <h2>Autonomous</h2><br>
+        <!-- 2018 Season-specific fields -->
+        <br>
+        <button class="nextPage" onclick="previousSection(window.innerWidth);"><span>Back</span></button>
+        <button class="nextPage" onclick="nextSection(window.innerWidth);"><span>Next</span></button>
+      </div>
+      <div class="formPage" id="pg3">
+        <!-- Teleop
+        -->
+        <h2>Teleoperated</h2><br>
+        <!-- 2018 Season-specific fields -->
+        <br>
+        <button class="nextPage" onclick="previousSection(window.innerWidth);"><span>Back</span></button>
+        <button class="nextPage" onclick="nextSection(window.innerWidth);"><span>Next</span></button>
+      </div>
+      <div class="formPage" id="pg4">
+        <!-- Endgame
+        -->
+        <h2>Endgame</h2><br>
+        <!-- 2018 Season-specific fields -->
+        <br>
+        <button class="nextPage" onclick="previousSection(window.innerWidth);"><span>Back</span></button>
+        <button class="nextPage" onclick="nextSection(window.innerWidth);"><span>Next</span></button>
+      </div>
+      <div class="formPage" id="pg5">
+        <!-- Overall
+          Overall Rating (1-4) [_]
+          Overall Comments (Strengths and weaknesses)
+          +--------------------+
+          |                    |
+          |                    |
+          |                    |
+          |                    |
+          |                    |
+          +--------------------+
+        -->
+        <h2>Overall</h2><br>
+        <span>Overall Rating: (1-4)</span><br>
+        <input type="number" name="overall-teamRating" min="1" max="4"><br><br>
+        <span>Overall Comments: (Strengths and Weaknesses)</span><br>
+        <textarea name="overall-comments"></textarea>
+        <br>
+        <button class="nextPage" onclick="previousSection(window.innerWidth);"><span>Back</span></button>
+      </div>
+    </div>
+    <div class="spacer" id="belowPage">&nbsp;</div>
+    <div class="extraInfo">
+      <div class="alert redAlert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <span id="redAlertContent">Generic Danger Message</span>
+      </div>
+      <div class="alert yellowAlert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <span id="yellowAlertContent">Generic Warning Message</span>
+      </div>
+      <div class="alert blueAlert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <span id="blueAlertContent">Generic Information Message</span>
+      </div>
+      <div class="alert greenAlert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <span id="greenAlertContent">Generic Success Message</span>
+      </div>
+    </div>
+  </body>
+</html>

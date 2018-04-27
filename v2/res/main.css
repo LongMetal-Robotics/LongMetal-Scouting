@@ -1,0 +1,206 @@
+body {
+  margin: 0px;
+}
+
+div.titleBar {
+  padding: 5px;
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-color: #2195f2;
+  box-shadow: 0 5px 20px #8eacbb;
+}
+
+div.spacer {
+  height: 47px;
+  width: 150%;
+}
+
+div.pageContent {
+  positon: relative;
+  padding: 48px;
+  width: 100%;
+  height: calc(100% - 47px);
+}
+
+div.formPage {
+  padding: 24px;
+  padding-bottom: 0px;
+  width: calc(50% - 144px);
+  min-width: 131px;
+  height: 355px;
+  box-shadow: 5px 5px 20px #babdbe;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+div#pg1 {
+  position: relative;
+}
+
+div#pg2 {
+  position: absolute;
+  top: 95px;
+  left: 50%;
+}
+
+div#pg3 {
+  position: absolute;
+  top: 95px;
+  left: 100%;
+}
+
+div#pg4 {
+  position: absolute;
+  top: 95px;
+  left: 150%;
+}
+
+div#pg5 {
+  position: absolute;
+  top: 95px;
+  left: 200%;
+}
+
+h1 {
+  margin: 0px;
+  font-family: 'Lato', sans-serif;
+  color: #fafafa;
+}
+
+h2 {
+  margin: 0px;
+  font-family: 'Lato', sans-serif;
+  color: #212121;
+}
+
+span {
+  font-family: 'Open Sans', sans-serif;
+}
+
+button {
+    background-color: #cfd8dc;
+    border: none;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    margin-bottom: 0px;
+    cursor: pointer;
+}
+
+input {
+  font-family: 'Lato', sans-serif;
+  margin-left: 5px;
+  border-style: none;
+  border-bottom-style: solid;
+  border-bottom-color: #d3d3d3;
+  outline: none;
+  -webkit-animation-name: fromFocus;
+  -webkit-animation-duration: 0.25s;
+  animation-name: fromFocus;
+  animation-duration: 0.25s;
+}
+
+input:focus {
+  border-bottom-color: #2196F3;
+  -webkit-animation-name: toFocus;
+  -webkit-animation-duration: 0.25s;
+  animation-name: toFocus;
+  animation-duration: 0.25s;
+}
+
+textarea {
+  font-family: 'Lato', sans-serif;
+  margin-left: 5px;
+  border-style: none;
+  border-bottom-style: solid;
+  border-bottom-color: #d3d3d3;
+  border-bottom-width: 2px;
+  outline: none;
+  resize: none;
+  -webkit-animation-name: fromFocus;
+  -webkit-animation-duration: 0.25s;
+  animation-name: fromFocus;
+  animation-duration: 0.25s;
+}
+
+textarea:focus {
+  resize: vertical;
+  border-bottom-color: #2196F3;
+  -webkit-animation-name: toFocus;
+  -webkit-animation-duration: 0.25s;
+  animation-name: toFocus;
+  animation-duration: 0.25s;
+}
+
+@keyframes toFocus {
+  from {border-bottom-color: #d3d3d3;}
+  to {border-bottom-color: #2196F3;}
+}
+
+@-webkit-keyframes toFocus {
+  from {border-bottom-color: #d3d3d3;}
+  to {border-bottom-color: #2196F3;}
+}
+
+@keyframes fromFocus {
+  from {border-bottom-color: #2196F3;}
+  to {border-bottom-color: #d3d3d3;}
+}
+
+@-webkit-keyframes fromFocus {
+  from {border-bottom-color: #2196F3;}
+  to {border-bottom-color: #d3d3d3;}
+}
+
+/* The alert message box */
+.alert {
+  display: none;
+  width: calc(100% - 40px);
+  padding: 20px;
+  color: white;
+  margin-bottom: 15px;
+  position: fixed;
+  left: 0px;
+}
+
+.redAlert {
+  background-color: #f44336; /* Red */
+  bottom: 0px;
+}
+
+.yellowAlert {
+  background-color: #ff9800; /* Yellow */
+  bottom: 0px;
+}
+
+.blueAlert {
+  background-color: #2196f3; /* Blue */
+  bottom: 0px;
+}
+
+.greenAlert {
+  background-color: #4caf50; /* Green */
+  bottom: 0px;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+    color: black;
+}

@@ -2,15 +2,20 @@
 <html>
   <head>
     <title>FRC Team 7127 Scouting</title>
+    <!-- Metadata -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Stylesheets & Fonts -->
     <link rel="stylesheet" href="res/main.css"> <!-- Main stylesheet -->
     <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans" rel="stylesheet"> <!-- Google Fonts import- Open Sans and Lato -->
-    <script type="text/javascript" src="res/js/smoothAdvance.js"></script>
+    <!-- Scripts -->
+    <script type="text/javascript" src="res/js/main.js"></script>
+    <script type="text/javascript" src="res/js/smooth-scroll.js"></script>
   </head>
   <body>
     <div class="titleBar">
       <h1>LongMetal Scouting</h1>
     </div>
-    <div class="spacer" id="abovePage">&nbsp;</div>
+    <div class="vertSpacer" id="abovePage">&nbsp;</div>
     <div class="pageContent">
       <div class="formPage" id="pg1">
         <!-- General
@@ -32,35 +37,39 @@
         <span>Matches Against:</span><br>
         <input type="text" name="general-matchesAgainst">
         <br>
-        <button class="nextPage" onclick="nextSection(window.innerWidth);" style="position: absolute; right: -2px; border-top-left-radius: 6px;"><span>Next</span></button>
+        <a href="#pg2"><span>Next</span></a>
       </div>
+      <div class="hztlSpacer">&nbsp;</div>
       <div class="formPage" id="pg2">
         <!-- Autonomous
         -->
         <h2>Autonomous</h2><br>
         <!-- 2018 Season-specific fields -->
         <br>
-        <button class="nextPage" onclick="previousSection(window.innerWidth);"><span>Back</span></button>
-        <button class="nextPage" onclick="nextSection(window.innerWidth);"><span>Next</span></button>
+        <a href="#pg1"><span>Back</span></a>
+        <a href="#pg3"><span>Next</span></a>
       </div>
+      <div class="hztlSpacer">&nbsp;</div>
       <div class="formPage" id="pg3">
         <!-- Teleop
         -->
         <h2>Teleoperated</h2><br>
         <!-- 2018 Season-specific fields -->
         <br>
-        <button class="nextPage" onclick="previousSection(window.innerWidth);"><span>Back</span></button>
-        <button class="nextPage" onclick="nextSection(window.innerWidth);"><span>Next</span></button>
+        <a href="#pg2"><span>Back</span></a>
+        <a href="#pg4"><span>Next</span></a>
       </div>
+      <div class="hztlSpacer">&nbsp;</div>
       <div class="formPage" id="pg4">
         <!-- Endgame
         -->
         <h2>Endgame</h2><br>
         <!-- 2018 Season-specific fields -->
         <br>
-        <button class="nextPage" onclick="previousSection(window.innerWidth);"><span>Back</span></button>
-        <button class="nextPage" onclick="nextSection(window.innerWidth);"><span>Next</span></button>
+        <a href="#pg3"><span>Back</span></a>
+        <a href="#pg5"><span>Next</span></a>
       </div>
+      <div class="hztlSpacer">&nbsp;</div>
       <div class="formPage" id="pg5">
         <!-- Overall
           Overall Rating (1-4) [_]
@@ -79,10 +88,10 @@
         <span>Overall Comments: (Strengths and Weaknesses)</span><br>
         <textarea name="overall-comments"></textarea>
         <br>
-        <button class="nextPage" onclick="previousSection(window.innerWidth);"><span>Back</span></button>
+        <a href="#pg4"><span>Back</span></a>
       </div>
     </div>
-    <div class="spacer" id="belowPage">&nbsp;</div>
+    <div class="vertSpacer" id="belowPage">&nbsp;</div>
     <div class="extraInfo">
       <div class="alert redAlert">
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
@@ -101,5 +110,8 @@
         <span id="greenAlertContent">Generic Success Message</span>
       </div>
     </div>
+    <script>
+	    var scroll = new SmoothScroll('a[href*="#"]');
+    </script>
   </body>
 </html>

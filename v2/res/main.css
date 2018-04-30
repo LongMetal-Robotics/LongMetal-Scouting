@@ -1,8 +1,10 @@
 body {
   margin: 0px;
+  background-color: #2195f2;
 }
 
 div.titleBar {
+  z-index: 1;
   padding: 5px;
   width: 100%;
   position: fixed;
@@ -12,56 +14,71 @@ div.titleBar {
   box-shadow: 0 5px 20px #8eacbb;
 }
 
-div.spacer {
+div.vrtSpacer {
   height: 47px;
   width: 150%;
 }
 
-div.pageContent {
-  positon: relative;
-  padding: 48px;
-  width: 100%;
-  height: calc(100% - 47px);
+div.hztlSpacer {
+  width: 48px;
 }
 
-div.formPage {
+.pageContent {
+  padding: 48px;
+  /*width: 100%;*/
+  height: calc(100% - 47px);
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  background-color: #fff;
+}
+
+.formPage {
   padding: 24px;
-  padding-bottom: 0px;
   width: calc(50% - 144px);
-  min-width: 131px;
+  min-width: 143px;
   height: 355px;
   box-shadow: 5px 5px 20px #babdbe;
   border-radius: 6px;
-  overflow: hidden;
+  overflow-x: hidden;
+  /*display: inline-block;*/
 }
 
-div#pg1 {
+@media (orientation:portrait) {
+  .pageContent {
+    overflow: initial;
+    white-space: normal;
+  }
+  
+  .formPage {
+    width: calc(100% - 48px);
+    padding-bottom: 0px;
+  }
+  
+  a {
+    display: none;
+  }
+}
+
+/*#pg1 {
   position: relative;
 }
 
-div#pg2 {
-  position: absolute;
-  top: 95px;
-  left: 50%;
+#pg2 {
+  position: relative;
 }
 
-div#pg3 {
-  position: absolute;
-  top: 95px;
-  left: 100%;
+#pg3 {
+  position: relative;
 }
 
-div#pg4 {
-  position: absolute;
-  top: 95px;
-  left: 150%;
+#pg4 {
+  position: relative;
 }
 
-div#pg5 {
-  position: absolute;
-  top: 95px;
-  left: 200%;
-}
+#pg5 {
+  position: relative;
+}*/
 
 h1 {
   margin: 0px;

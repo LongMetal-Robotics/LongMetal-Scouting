@@ -5,17 +5,19 @@
     <!-- Metadata -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Stylesheets & Fonts -->
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">-->
     <link rel="stylesheet" href="res/main.css"> <!-- Main stylesheet -->
-    <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans" rel="stylesheet"> <!-- Google Fonts import- Open Sans and Lato -->
+    <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans|Material+Icons" rel="stylesheet"> <!-- Google Fonts import- Open Sans and Lato -->
     <!-- Scripts -->
     <script type="text/javascript" src="res/js/main.js"></script>
-    <script type="text/javascript" src="res/js/smooth-scroll.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
   </head>
   <body>
     <div class="titleBar">
       <h1>LongMetal Scouting</h1>
     </div>
-    <div class="vertSpacer" id="abovePage">&nbsp;</div>
+    <i id="top"></i>
+    <div class="vertSpacer" id="titleEquiv">&nbsp;</div>
     <div class="pageContent">
       <div class="formPage" id="pg1">
         <!-- General
@@ -39,7 +41,8 @@
         <br>
         <a href="#pg2"><span>Next</span></a>
       </div>
-      <div class="hztlSpacer">&nbsp;</div>
+      <i id="auto"></i>
+      <div class="vertSpacer" id="titleEquiv">&nbsp;</div>
       <div class="formPage" id="pg2">
         <!-- Autonomous
         -->
@@ -49,7 +52,8 @@
         <a href="#pg1"><span>Back</span></a>
         <a href="#pg3"><span>Next</span></a>
       </div>
-      <div class="hztlSpacer">&nbsp;</div>
+      <i id="teleop"></i>
+      <div class="vertSpacer" id="titleEquiv">&nbsp;</div>
       <div class="formPage" id="pg3">
         <!-- Teleop
         -->
@@ -59,7 +63,8 @@
         <a href="#pg2"><span>Back</span></a>
         <a href="#pg4"><span>Next</span></a>
       </div>
-      <div class="hztlSpacer">&nbsp;</div>
+      <i id="endgame"></i>
+      <div class="vertSpacer" id="titleEquiv">&nbsp;</div>
       <div class="formPage" id="pg4">
         <!-- Endgame
         -->
@@ -69,7 +74,8 @@
         <a href="#pg3"><span>Back</span></a>
         <a href="#pg5"><span>Next</span></a>
       </div>
-      <div class="hztlSpacer">&nbsp;</div>
+      <i id="overall"></i>
+      <div class="vertSpacer" id="titleEquiv">&nbsp;</div>
       <div class="formPage" id="pg5">
         <!-- Overall
           Overall Rating (1-4) [_]
@@ -91,7 +97,9 @@
         <a href="#pg4"><span>Back</span></a>
       </div>
     </div>
-    <div class="vertSpacer" id="belowPage">&nbsp;</div>
+    
+    <div class="fab ripple"><i class="material-icons">send</i></div>
+    
     <div class="extraInfo">
       <div class="alert redAlert">
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
@@ -110,8 +118,5 @@
         <span id="greenAlertContent">Generic Success Message</span>
       </div>
     </div>
-    <script>
-	    var scroll = new SmoothScroll('a[href*="#"]');
-    </script>
   </body>
 </html>

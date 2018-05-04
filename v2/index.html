@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="res/main.css"> <!-- Main stylesheet -->
     <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans|Material+Icons" rel="stylesheet"> <!-- Google Fonts import- Open Sans and Lato -->
     <!-- Scripts -->
-    <script type="text/javascript" src="res/js/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
   </head>
   <body>
@@ -34,9 +33,15 @@
         <input type="number" name="general-teamNumber" min="1" max="7384"><br><br>
         <span>Rookie Year:</span><br>
         <input type="number" name="general-rookieYear" min="1995" max="2019"><br><br>
-        <span>Matches Together:</span><br>
+        <span>Matches Together:
+        <div class="helpBox" id="matchesTogether">
+          <span class="helpMark">?</span>
+        </div></span>
+        <br>
         <input type="text" name="general-matchesTogether"><br><br>
-        <span>Matches Against:</span><br>
+        <span>Matches Against: <div class="helpBox" id="matchesAgainst">
+          <span class="helpMark">?</span>
+        </div></span><br>
         <input type="text" name="general-matchesAgainst">
         <br>
         <a href="#pg2"><span>Next</span></a>
@@ -118,5 +123,7 @@
         <span id="greenAlertContent">Generic Success Message</span>
       </div>
     </div>
+    <!-- Postload -->
+    <script type="text/javascript" src="res/js/main.js"></script>
   </body>
 </html>

@@ -1,27 +1,13 @@
-/*function nextSection(windowWidth) {
-  windowWidth = windowWidth / 2;
-  for (var i = 0; i < windowWidth; i++) {
-    document.body.scrollLeft += 1;
-  }
-}
+var teamName = document.getElementsByName('general-teamName')[0];
+var teamNumber = document.getElementsByName('general-teamNumber')[0];
+var rookieYear = document.getElementsByName('general-rookieYear')[0];
+var matchesTogether = document.getElementsByName('general-matchesTogether')[0];
+var matchesAgainst = document.getElementsByName('general-matchesAgainst')[0];
+var rating = document.getElementsByName('overall-teamRating')[0];
+var comments = document.getElementsByName('overall-comments')[0];
 
-function previousSection(windowWidth) {
-  windowWidth = windowWidth / 2;
-  for (var i = 0; i < windowWidth; i++) {
-    document.body.scrollLeft -= 1;
-  }
-}*/
+document.getElementById('matchesTogether').addEventListener('mouseover', function() {document.getElementById('matchesTogether').innerText = "Add values as a comma-seperated list";});
+document.getElementById('matchesTogether').addEventListener('mouseout', function() {document.getElementById('matchesTogether').innerText = "?";});
 
-function nextSection(windowWidth, repititions) {
-  document.body.scrollLeft += 1;
-  if (repititions < windowWidth / 2) {
-    setTimeout(10, nextSection(windowWidth, repititions + 1));
-  }
-}
-
-function previousSection(windowWidth, repititions) {
-  document.body.scrollLeft -= 1;
-  if (repititions < windowWidth / 2) {
-    setTimeout(10, nextSection(windowWidth, repititions + 1));
-  }
-}
+document.getElementById('matchesAgainst').addEventListener('mouseover', function() {document.getElementById('matchesAgainst').innerText = "Add values as a comma-seperated list";});
+document.getElementById('matchesAgainst').addEventListener('mouseout', function() {document.getElementById('matchesAgainst').innerText = "?";});

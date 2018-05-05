@@ -1,0 +1,283 @@
+body {
+  margin: 0px;
+  background-color: #2195f2;
+}
+
+div.titleBar {
+  z-index: 1;
+  padding: 5px;
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-color: #2195f2;
+  box-shadow: 0 5px 20px #8eacbb;
+}
+
+div.vertSpacer {
+  height: 47px;
+  /*width: 150%;*/
+}
+
+div.hztlSpacer {
+  width: 48px;
+}
+
+.pageContent {
+  padding: 48px;
+  /*width: 100%;*/
+  height: calc(100% - 47px);
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  background-color: #fff;
+}
+
+.formPage {
+  padding: 24px;
+  width: calc(50% - 144px);
+  min-width: 143px;
+  height: 355px;
+  box-shadow: 5px 5px 20px #babdbe;
+  border-radius: 6px;
+  overflow-x: hidden;
+  /*display: inline-block;*/
+}
+
+.helpBox {
+  width: 18px;
+  height: 18px;
+  background-color: #b8b8b8;
+  border-radius: 9px;
+  transition: all 0.1s ease-in-out;
+  display: inline-block;
+  overflow-x: hidden;
+  
+  font-size: 14px;
+  color: white;
+  text-align: center;
+  line-height: 18px;
+}
+
+.helpBox:hover {
+  background-color: #aaa;
+  width: 252px;
+}
+
+.fab {
+  width: 70px;
+  height: 70px;
+  background-color: #f44336;
+  border-radius: 50%;
+  box-shadow: 3px 3px 10px 0 #666;
+  transition: all 0.1s ease-in-out;
+  
+  font-size: 50px;
+  color: white;
+  text-align: center;
+  line-height: 70px;
+  
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+}
+ 
+.fab:hover {
+  box-shadow: 3px 3px 14px 0 #666;
+  transform: scale(1.05);
+}
+
+/* Ripple effect */
+.ripple {
+  background-position: center;
+  transition: background 0.8s;
+}
+
+.ripple:hover {
+  background: #d32f2f;
+  radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
+}
+
+.ripple:active {
+  background-color: #c62828;
+  background-size: 100%;
+  transition: background 0s;
+}
+
+@media (orientation:portrait) {
+  .pageContent {
+    overflow: initial;
+    white-space: normal;
+  }
+  
+  .formPage {
+    width: calc(100% - 48px);
+    padding-bottom: 0px;
+  }
+  
+  a {
+    display: none;
+  }
+}
+
+/*#pg1 {
+  position: relative;
+}
+
+#pg2 {
+  position: relative;
+}
+
+#pg3 {
+  position: relative;
+}
+
+#pg4 {
+  position: relative;
+}
+
+#pg5 {
+  position: relative;
+}*/
+
+h1 {
+  margin: 0px;
+  font-family: 'Lato', sans-serif;
+  color: #fafafa;
+}
+
+h2 {
+  margin: 0px;
+  font-family: 'Lato', sans-serif;
+  color: #212121;
+}
+
+span {
+  font-family: 'Open Sans', sans-serif;
+}
+
+button {
+    background-color: #cfd8dc;
+    border: none;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    margin-bottom: 0px;
+    cursor: pointer;
+}
+
+input {
+  font-family: 'Lato', sans-serif;
+  margin-left: 5px;
+  border-style: none;
+  border-bottom-style: solid;
+  border-bottom-color: #d3d3d3;
+  outline: none;
+  -webkit-animation-name: fromFocus;
+  -webkit-animation-duration: 0.25s;
+  animation-name: fromFocus;
+  animation-duration: 0.25s;
+}
+
+input:focus {
+  border-bottom-color: #2196F3;
+  -webkit-animation-name: toFocus;
+  -webkit-animation-duration: 0.25s;
+  animation-name: toFocus;
+  animation-duration: 0.25s;
+}
+
+textarea {
+  font-family: 'Lato', sans-serif;
+  margin-left: 5px;
+  border-style: none;
+  border-bottom-style: solid;
+  border-bottom-color: #d3d3d3;
+  border-bottom-width: 2px;
+  outline: none;
+  resize: none;
+  -webkit-animation-name: fromFocus;
+  -webkit-animation-duration: 0.25s;
+  animation-name: fromFocus;
+  animation-duration: 0.25s;
+}
+
+textarea:focus {
+  resize: vertical;
+  border-bottom-color: #2196F3;
+  -webkit-animation-name: toFocus;
+  -webkit-animation-duration: 0.25s;
+  animation-name: toFocus;
+  animation-duration: 0.25s;
+}
+
+@keyframes toFocus {
+  from {border-bottom-color: #d3d3d3;}
+  to {border-bottom-color: #2196F3;}
+}
+
+@-webkit-keyframes toFocus {
+  from {border-bottom-color: #d3d3d3;}
+  to {border-bottom-color: #2196F3;}
+}
+
+@keyframes fromFocus {
+  from {border-bottom-color: #2196F3;}
+  to {border-bottom-color: #d3d3d3;}
+}
+
+@-webkit-keyframes fromFocus {
+  from {border-bottom-color: #2196F3;}
+  to {border-bottom-color: #d3d3d3;}
+}
+
+/* The alert message box */
+.alert {
+  display: none;
+  width: calc(100% - 40px);
+  padding: 20px;
+  color: white;
+  margin-bottom: 15px;
+  position: fixed;
+  left: 0px;
+}
+
+.redAlert {
+  background-color: #f44336; /* Red */
+  bottom: 0px;
+}
+
+.yellowAlert {
+  background-color: #ff9800; /* Yellow */
+  bottom: 0px;
+}
+
+.blueAlert {
+  background-color: #2196f3; /* Blue */
+  bottom: 0px;
+}
+
+.greenAlert {
+  background-color: #4caf50; /* Green */
+  bottom: 0px;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+    color: black;
+}

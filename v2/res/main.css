@@ -3,15 +3,66 @@ body {
   background-color: #2195f2;
 }
 
+.nojs {
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  text-align: center;
+  color: #fff;
+  background-color: #2195f2;
+}
+
+.nojsSpacer {
+  height: 40%;
+}
+
 div.titleBar {
   z-index: 1;
-  padding: 5px;
+  padding-left: 0px;
+  padding-bottom: 0px;
   width: 100%;
   position: fixed;
   top: 0px;
   left: 0px;
   background-color: #2195f2;
   box-shadow: 0 5px 20px #8eacbb;
+}
+
+.load-bar {
+  display: none;
+  position: relative;
+  width: 100%;
+  height: 6px;
+  background-color: #fdba2c;
+}
+.bar {
+  content: "";
+  display: inline;
+  position: absolute;
+  width: 0;
+  height: 100%;
+  left: 50%;
+  text-align: center;
+}
+.bar:nth-child(1) {
+  background-color: #da4733;
+  animation: loading 3s linear infinite;
+}
+.bar:nth-child(2) {
+  background-color: #3b78e7;
+  animation: loading 3s linear 1s infinite;
+}
+.bar:nth-child(3) {
+  background-color: #fdba2c;
+  animation: loading 3s linear 2s infinite;
+}
+@keyframes loading {
+    from {left: 50%; width: 0;z-index:100;}
+    33.3333% {left: 0; width: 100%;z-index: 10;}
+    to {left: 0; width: 100%;}
 }
 
 div.vertSpacer {
@@ -52,7 +103,7 @@ div.hztlSpacer {
   transition: all 0.1s ease-in-out;
   display: inline-block;
   overflow-x: hidden;
-  
+
   font-size: 14px;
   color: white;
   text-align: center;
@@ -71,17 +122,17 @@ div.hztlSpacer {
   border-radius: 50%;
   box-shadow: 3px 3px 10px 0 #666;
   transition: all 0.1s ease-in-out;
-  
+
   font-size: 50px;
   color: white;
   text-align: center;
   line-height: 70px;
-  
+
   position: fixed;
   right: 50px;
   bottom: 50px;
 }
- 
+
 .fab:hover {
   box-shadow: 3px 3px 14px 0 #666;
   transform: scale(1.05);
@@ -109,12 +160,12 @@ div.hztlSpacer {
     overflow: initial;
     white-space: normal;
   }
-  
+
   .formPage {
     width: calc(100% - 48px);
     padding-bottom: 0px;
   }
-  
+
   a {
     display: none;
   }
@@ -141,6 +192,7 @@ div.hztlSpacer {
 }*/
 
 h1 {
+  padding: 5px;
   margin: 0px;
   font-family: 'Lato', sans-serif;
   color: #fafafa;
@@ -150,6 +202,11 @@ h2 {
   margin: 0px;
   font-family: 'Lato', sans-serif;
   color: #212121;
+}
+
+h3 {
+  font-family: 'Lato', sans-serif;
+  color: #fafafa;
 }
 
 span {

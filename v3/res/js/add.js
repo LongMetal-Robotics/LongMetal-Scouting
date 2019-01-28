@@ -12,7 +12,13 @@ function updateResponses() {
     rookieYear = "unknown";
   }
   matchesTogether = $('#general-matches-with').val().match(/Q[0-9]*/g);   // Validate (to int []) Q1, Q2, Q3 = [1, 2, 3]
+  if (matchesTogether == undefined) {
+    matchesTogether = 0;
+  }
   matchesAgainst = $('#general-matches-against').val().match(/Q[0-9]*/g); // Validate (to int []) Q4, Q5, Q6 = [4, 5, 6]
+  if (matchesAgainst == undefined) {
+    matchesAgainst = 0;
+  }
 
   starting = "unknown";       // Validate (to String) undefined, 'cargo', 'hatch'
   if ($('#auto-load-1')[0].checked && !$('#auto-load-2')[0].checked) {
@@ -144,6 +150,20 @@ $('#auto-control-mode-teleop').click(function() {
   }
 });
 // TODO: team number onblur: search for scouted teams
+$('#general-teamNumber').blur(function(event) {
+  firebase.database().ref('/teams/data/frc' + teamNumber).once('value').then(function(snapshot) {
+    let team = snapshot.val();
+
+    if (team != null) {
+      $('.toast').toast('show');
+    }
+  });
+});
+
+function autofill() {
+  $('.toast').toast('hide');
+}
+
 $('#submit').click(function(event) {
   event.preventDefault();
   firebaseUpload();
@@ -154,13 +174,23 @@ function firebaseUpload() {
     var scoutedTeams;
     firebase.database().ref('/teams/numbers/').once('value').then(function(snapshot) {
       scoutedTeams = snapshot.val();
-      if (!scoutedTeams.includes(teamNumber)) {
-        scoutedTeams[scoutedTeams.length + 1] = teamNumber;
+      if (scoutedTeams != null) {
+        if (!scoutedTeams.includes(teamNumber)) {
+          scoutedTeams[scoutedTeams.length + 1] = teamNumber;
+          firebase.database().ref('/teams/numbers/').set(scoutedTeams);
+        }
+      } else {
+        scoutedTeams = [teamNumber];
         firebase.database().ref('/teams/numbers/').set(scoutedTeams);
       }
     });
     firebase.database().ref('/teams/names/frc' + teamNumber).set(teamJSON.general.name);
     firebase.database().ref('/teams/data/frc' + teamNumber).set(teamJSON);
+    $('.mr-auto').text('Success');
+    $('#toast-body').html('Successfully added team. <a href="team?t=frc' + teamNumber + '">Go To Team Page</a>');
+    $('button[data-dismiss="toast"]').hide();
+    $('button[onclick="javascript:autofill()"]').hide();
+    $('.toast').toast('show');
   } else {
     $('#modal-body').text("You must specify a team number before submitting.");
     $('#modal').modal('show');

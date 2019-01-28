@@ -44,12 +44,24 @@
         <a href="add/" class="nav-link">Add Team</a>
       </li>
       <li class="nav-item">
-        <a href="javascript:presentJSON()" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Use this to get the raw team list data">Get JSON</a> <!-- TODO: action -->
+        <a href="javascript:presentJSON()" class="nav-link json" data-toggle="tooltip" data-placement="bottom" title="Use this to get the raw team list data">Get JSON</a>
       </li>
     </ul>
     <div class="container" name="team-list">
       <div class="row justify-content-center" id="team-list">
-        <h3 id="loadholder">Loading...</h3>
+        <h3 id="loadholder">
+          Loading...
+          <br>
+          <div class="spinner-grow text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-primary delay-25" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-primary delay-50" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </h3>
       </div>
     </div>
     <div class="modal fade" tabindex="-1" role="dialog" id="modal">
@@ -67,6 +79,24 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
             <button type="button" class="btn btn-primary" onclick="javascript:location.assign('add/')">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog" id="teamJSON">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="json-modal-title">ERROR</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p id="json-modal-body">An unexpected error has occured. What did you expect from software written by a 15 year old?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
           </div>
         </div>
       </div>

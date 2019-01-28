@@ -44,7 +44,7 @@
         <a href="add/" class="nav-link disabled">Add Team</a>
       </li>
       <li class="nav-item">
-        <a href="javascript:setJSON()" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Only use this if you're exactly sure what you're doing. You could really mess stuff up.">Set JSON <i class="material-icon">warning</i></a> <!-- TODO: tooltip, action -->
+        <a href="javascript:setJSON()" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Only use this if you're exactly sure what you're doing. You could really mess stuff up.">Set JSON <i class="material-icon">warning</i></a> <!-- TODO: action -->
       </li>
     </ul>
     <form class="container">
@@ -322,6 +322,16 @@
             <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="toast fade hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000">
+      <div class="toast-header">
+        <strong class="mr-auto">Suggestion Agent</strong>
+      </div>
+      <div class="toast-body">
+        <span id="toast-body">This team has already been scouted. Autofill?</span>
+        <button type="button" class="btn btn-secondary" data-dismiss="toast" aria-label="close">No</button>
+        <button type="button" class="btn btn-primary" onclick="javascript:autofill()">Yes</button>
       </div>
     </div>
     <script src="res/js/add.js"></script>

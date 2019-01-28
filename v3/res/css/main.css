@@ -28,6 +28,12 @@ body {
 
 .list-group {
   margin-bottom: 30px;
+  padding-left: 15px;
+}
+
+.toast {
+  position: fixed;
+  top: 50px;
 }
 
 .copyright {
@@ -42,4 +48,12 @@ body {
   transform: translateX(-50%);
   font-size: 12px;
   color: gray;
+}
+
+.delay-25 {
+  animation-delay: 0.25s;
+}
+
+.delay-50 {
+  animation-delay: 0.5s;
 }

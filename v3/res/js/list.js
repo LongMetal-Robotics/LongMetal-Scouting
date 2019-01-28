@@ -33,24 +33,38 @@ function generateTeam(tid, json) {
         let matchesWith = document.createElement('span');
         matchesWith.classList.add('matches-with');
         matchesWith.innerText = "Matches With: ";
-        for (var i = 0; i < json.general.matchesTogether.length; i++) {
+        if (json.general.matchesTogether.length > 0) {
+          for (var i = 0; i < json.general.matchesTogether.length; i++) {
+            let matchBadge = document.createElement('span');
+            matchBadge.classList.add('badge', 'badge-secondary'); // No system implemented for match color
+            matchBadge.innerText = json.general.matchesTogether[i];
+            matchesWith.appendChild(matchBadge);
+            matchesWith.innerHTML += " ";
+          }
+        } else {
           let matchBadge = document.createElement('span');
-          matchBadge.classList.add('badge', 'badge-secondary'); // No system implemented for match color
-          matchBadge.innerText = json.general.matchesTogether[i];
+          matchBadge.classList.add('badge', 'badge-info');
+          matchBadge.innerText = "None";
           matchesWith.appendChild(matchBadge);
-          matchesWith.innerHTML += " ";
         }
       matches.appendChild(matchesWith);
       matches.innerHTML += '&nbsp;&nbsp;';
         let matchesAgainst = document.createElement('span');
         matchesAgainst.classList.add('matches-with');
         matchesAgainst.innerText = "Matches Against: ";
-        for (var i = 0; i < json.general.matchesAgainst.length; i++) {
+        if (json.general.matchesAgainst.length > 0) {
+          for (var i = 0; i < json.general.matchesAgainst.length; i++) {
+            let matchBadge = document.createElement('span');
+            matchBadge.classList.add('badge', 'badge-secondary'); // No system implemented for match color
+            matchBadge.innerText = json.general.matchesAgainst[i];
+            matchesAgainst.appendChild(matchBadge);
+            matchesAgainst.innerHTML += " ";
+          }
+        } else {
           let matchBadge = document.createElement('span');
-          matchBadge.classList.add('badge', 'badge-secondary'); // No system implemented for match color
-          matchBadge.innerText = json.general.matchesAgainst[i];
+          matchBadge.classList.add('badge', 'badge-info');
+          matchBadge.innerText = "None";
           matchesAgainst.appendChild(matchBadge);
-          matchesAgainst.innerHTML += " ";
         }
       matches.appendChild(matchesAgainst);
     link.appendChild(matches);
@@ -66,7 +80,7 @@ function generateTeam(tid, json) {
             autoText.appendChild(start);
             autoText.innerHTML += " ";
           }
-          if (autoJSON.controlMethod != [false, false, false]) {
+          if (autoJSON.controlMethod[0] || autoJSON.controlMethod[1] || autoJSON.controlMethod[2]) {
             let control = document.createElement('span');
             control.classList.add('badge', 'badge-primary');
             if (autoJSON.controlMethod[0] && autoJSON.controlMethod[1]) {
@@ -98,7 +112,7 @@ function generateTeam(tid, json) {
             autoText.appendChild(line);
             autoText.innerHTML += " ";
           }
-          if (autoJSON.rocket.sides != [false, false]) {
+          if (autoJSON.rocket.sides[0] || autoJSON.rocket.sides[1]) {
             let rocket = document.createElement('span');
             rocket.classList.add('badge');
             if (autoJSON.rocket.sides[0] && !autoJSON.rocket.sides[1]) {
@@ -142,7 +156,7 @@ function generateTeam(tid, json) {
             autoText.appendChild(rocket);
             autoText.innerHTML += " ";
           }
-          if (autoJSON.ship != [false, false]) {
+          if (autoJSON.ship[0] || autoJSON.ship[1]) {
             let ship = document.createElement('span');
             ship.classList.add('badge');
             ship.innerText = "S";
@@ -214,7 +228,7 @@ function generateTeam(tid, json) {
           let teleopText = document.createElement('span');
             teleopText.innerText = "Teleop: ";
             let teleopJSON = json.teleoperated;
-            if (teleopJSON.rocket.sides != [false, false]) {
+            if (teleopJSON.rocket.sides[0] || teleopJSON.rocket.sides[1]) {
               let rocket = document.createElement('span');
               rocket.classList.add('badge');
               if (teleopJSON.rocket.sides[0] && !teleopJSON.rocket.sides[1]) {
@@ -258,7 +272,7 @@ function generateTeam(tid, json) {
               teleopText.appendChild(rocket);
               teleopText.innerHTML += " ";
             }
-            if (teleopJSON.ship != [false, false]) {
+            if (teleopJSON.ship[0] || teleopJSON.ship[1]) {
               let ship = document.createElement('span');
               ship.classList.add('badge');
               ship.innerText = "S";
@@ -435,31 +449,42 @@ var teamNumbers = undefined, loaded = 0, load = 10;
 function loadTeams() {
   firebase.database().ref('/teams/numbers/').once('value').then(function(snapshot) {
     teamNumbers = snapshot.val();
-    $('h3').text('');
+    if (teamNumbers != null) {
+      $('h3').text('');
 
-    if (load > teamNumbers.length - 1) {
-      load = teamNumbers.length - 1;
-    }
-    for (var i = loaded + 1; i <= load; i++) {
-      firebase.database().ref('/teams/data/frc' + teamNumbers[i]).once('value').then(function(snapshot) {
-        let team = snapshot.val();
+      if (load > teamNumbers.length) {
+        load = teamNumbers.length;
+      }
+      for (var i = loaded; i < load; i++) {
+        firebase.database().ref('/teams/data/frc' + teamNumbers[i]).once('value').then(function(snapshot) {
+          let team = snapshot.val();
 
-        if (team == null) {
-          $('#modal-body').html("There have been no teams scouted yet. Why don't you <a href=\"add/\">add one</a>?");
-          $('#modal').modal('show');
-        } else {
           generateTeam(team.general.number, team);
-        }
-      });
+        });
+      }
+      loaded = load;
+      load += 10;
+    } else {
+      $('#modal-body').html("There have been no teams scouted yet. Why don't you <a href=\"add/\">add one</a>?");
+      $('#modal').modal('show');
+      $('.nav-link.json')[0].classList.add('disabled');
     }
-    loaded = load;
-    load += 10;
   });
 }
 
+
 if (!location.pathname.includes("/team")) {
   loadTeams();
-} else if (location.search.match(/frc[0-9]*/)[0] != "") {
+  function presentJSON() {
+    $('#json-modal-title').text('All Teams\' JavaScript Object Notation');
+    firebase.database().ref('/').once('value').then(function(snapshot) {
+      var db = snapshot.val();
+      $('#json-modal-body').html('Copy this to a safe place:<br><code>' + JSON.stringify(db) + '</code>');
+      $('#teamJSON').modal('show');
+    });
+  }
+} else if (location.search.match(/frc[0-9]*/) != null) {
+  // Team list with team
   firebase.database().ref('/teams/data/' + location.search.match(/frc[0-9]*/)[0]).once('value').then(function(snapshot) {
     $('h3').text('');
     let team = snapshot.val();
@@ -469,5 +494,35 @@ if (!location.pathname.includes("/team")) {
     console.log(error);
     $('h3').text('Uh oh. We haven\'t scouted that team yet.');
     $('a[href="javascript:presentJSON()"]')[0].classList.add('disabled');
+    $('a[data-toggle="modal"]')[0].classList.add('disabled');
   });
+  function presentJSON() {
+    $('#json-modal-title').text('Team JavaScript Object Notation');
+    firebase.database().ref('/teams/data/' + location.search.match(/frc[0-9]*/)[0]).once('value').then(function(snapshot) {
+      var db = snapshot.val();
+      $('#json-modal-body').html('Copy this to a safe place:<br><code>' + JSON.stringify(db) + '</code>');
+      $('#teamJSON').modal('show');
+    });
+  }
+} else {
+  $('.nav-link[href="javascript:presentJSON()"]')[0].classList.add('disabled');
+  $('.nav-link[data-target="#confirm"]')[0].classList.replace('text-danger', 'disabled');
+}
+
+function deleteTeam() {
+  firebase.database().ref('/teams/data/' + location.search.match(/frc[0-9]*/)[0]).remove();
+  firebase.database().ref('/teams/names/' + location.search.match(/frc[0-9]*/)[0]).remove();
+  firebase.database().ref('/teams/numbers/').once('value').then(function(snapshot) {
+    var arr = snapshot.val();
+    if (arr.length > 1) {
+      var arr1 = arr.slice(0, arr.indexOf(location.search.match(/frc[0-9]*/)[0].substr(3)));
+      var arr2 = arr.slice(arr.indexOf(location.search.match(/frc[0-9]*/)[0].substr(3)) + 1, arr.length);
+      arr = arr1.concat(arr2);
+      firebase.database().ref('/teams/numbers/').set(arr);
+    } else {
+      firebase.database().ref('/teams/numbers/').remove();
+    }
+  });
+  $('#confirm').modal('hide');
+  location.assign('');
 }

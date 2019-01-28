@@ -1,0 +1,45 @@
+/* main.css */
+
+body {
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 18px;
+}
+
+.material-icon {
+  font-family: 'Material Icons';
+  font-style: normal;
+}
+
+.nav {
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  margin-bottom: 8px;
+}
+
+.form-group-spacer {
+  display: block;
+  height: 32px;
+}
+
+[required]::after {
+  content: " *";
+  color: red;
+}
+
+.list-group {
+  margin-bottom: 30px;
+}
+
+.copyright {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  width: 75%;
+  border-top: 1px solid gray;
+  margin-top: 12px;
+  padding-top: 6px;
+  text-align: center;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: gray;
+}

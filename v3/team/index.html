@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Team Info | LongMetal Scouting v3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap -->
+      <!-- Dependencies -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+      <!-- Core -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Custom Code -->
+      <!-- Style -->
+        <link rel="stylesheet" href="../res/css/main.css">
+    <!--Firebase boilerplate-->
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+    <script>
+      function firebaseInit() {
+        // Initialize Firebase
+        var config = {
+          apiKey: "AIzaSyApKpqihGa0lJJN4WaDPafHtWNPLYxUXgg",
+          authDomain: "frc-team-7127-scouting.firebaseapp.com",
+          databaseURL: "https://frc-team-7127-scouting.firebaseio.com",
+          projectId: "frc-team-7127-scouting",
+          storageBucket: "frc-team-7127-scouting.appspot.com",
+          messagingSenderId: "881060266081"
+        };
+
+        firebase.initializeApp(config);
+      }
+      firebaseInit();
+    </script>
+    <base href="../">
+  </head>
+  <body>
+    <ul class="nav">
+      <li class="nav-item">
+        <a href="#" class="nav-link">Team List</a>
+      </li>
+      <li class="nav-item">
+        <a href="add/" class="nav-link">Add Team</a>
+      </li>
+      <li class="nav-item">
+        <a href="javascript:presentJSON()" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Use this to get the raw team data">Get JSON</a> <!-- TODO: action -->
+      </li>
+    </ul>
+    <div class="container" name="team-list">
+      <div class="row justify-content-center" id="team-list">
+        <h3 id="loadholder">Loading...</h3>
+      </div>
+    </div>
+    <script src="res/js/list.js"></script>
+    <script>
+      $('[data-toggle="tooltip"]').tooltip();
+    </script>
+    <span class="copyright">&copy; 2019 LongMetal Robotics</span>
+  </body>
+</html>

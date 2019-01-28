@@ -8,7 +8,8 @@ form {
   width: 100%;
 }
 
-table.statusBar {
+.statusBar {
+  display: block;
   background-color: #2196F3;
   height: 40px;
   width: 100%;
@@ -17,24 +18,23 @@ table.statusBar {
   box-shadow: 0 8px 20px lightgray;
 }
 
-div.scoutedTeams {
+.scoutedTeams {
   position: absolute;
   width: 100%;
 }
 
-div.scoutedTitle {
+.scoutedTitle {
   background-color: #2196F3;
   height: 40px;
   width: 100%;
 }
 
-div.scoutedData {
+.scoutedData {
   height: 100%;
   width: 100%;
   padding: 10px;
 }
-
-tr.tableHead {
+#tableHead {
   background-color:;
 }
 
@@ -42,14 +42,6 @@ td {
   vertical-align: top;
   padding-left: 5px;
   padding-right: 5px;
-}
-
-
-
-td.submit {
-  width: 50%;
-  text-align: right;
-  vertical-align: middle;
 }
 
 br {
@@ -62,8 +54,9 @@ a {
   font-weight: bold;
 }
 
-a.submitButton {
+.submitButton {
   cursor: pointer;
+  float: right;
 }
 
 h2 {
@@ -71,7 +64,7 @@ h2 {
   margin-bottom: 0px;
 }
 
-h2.statusTitle {
+.statusTitle {
   margin-left: 5px;
   margin-top: 3px;
   color: #fff;
@@ -90,7 +83,7 @@ b {
   font-family: 'Lato', sans-serif;
 }
 
-b.errorMessage {
+.errorMessage {
   font-weight: bold;
   color: #fff;
 }
@@ -104,19 +97,12 @@ textarea {
   border-bottom-width: 2px;
   outline: none;
   resize: none;
-  -webkit-animation-name: fromFocus;
-  -webkit-animation-duration: 0.25s;
-  animation-name: fromFocus;
-  animation-duration: 0.25s;
+  transition: 0.25s;
 }
 
 textarea:focus {
   resize: vertical;
   border-bottom-color: #2196F3;
-  -webkit-animation-name: toFocus;
-  -webkit-animation-duration: 0.25s;
-  animation-name: toFocus;
-  animation-duration: 0.25s;
 }
 
 input {
@@ -126,18 +112,11 @@ input {
   border-bottom-style: solid;
   border-bottom-color: #d3d3d3;
   outline: none;
-  -webkit-animation-name: fromFocus;
-  -webkit-animation-duration: 0.25s;
-  animation-name: fromFocus;
-  animation-duration: 0.25s;
+  transition: 0.25s;
 }
 
 input:focus {
   border-bottom-color: #2196F3;
-  -webkit-animation-name: toFocus;
-  -webkit-animation-duration: 0.25s;
-  animation-name: toFocus;
-  animation-duration: 0.25s;
 }
 
 ::selection {
@@ -148,24 +127,4 @@ input:focus {
 ::-moz-selection {
   background: #2916F3;
   color: #fff;
-}
-
-@keyframes toFocus {
-  from {border-bottom-color: #d3d3d3;}
-  to {border-bottom-color: #2196F3;}
-}
-
-@-webkit-keyframes toFocus {
-  from {border-bottom-color: #d3d3d3;}
-  to {border-bottom-color: #2196F3;}
-}
-
-@keyframes fromFocus {
-  from {border-bottom-color: #2196F3;}
-  to {border-bottom-color: #d3d3d3;}
-}
-
-@-webkit-keyframes fromFocus {
-  from {border-bottom-color: #2196F3;}
-  to {border-bottom-color: #d3d3d3;}
 }

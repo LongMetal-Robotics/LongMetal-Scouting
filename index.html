@@ -33,86 +33,83 @@
     </script>
   </head>
   <body onload="updateResponses()">
-    <table class="statusBar">
-      <tr>
-        <td class="title">
-          <h2 class="statusTitle">LongMetal Scouting</h2>
-        </td>
-        <td class="submit">
-          <a class="submitButton" id="submitButton">SUBMIT</a>
-        </td>
-      </tr>
-      <tr>
-      	<td class="errorModal">
-      	  <b class="errorMessage" id="errorMessage"></b>
-      	</td>
-      </tr>
-    </table>
+    <header class="statusBar">
+      <h2 class="statusTitle">LongMetal Scouting</h2>
+      <a class="submitButton" id="submitButton">Submit</a>
+    </header>
     <form>
       <div class="spacer">
         <br>
       </div>
-      <table>
-        <tr>
-          <td>
-            <h2>General</h2>
-            <h3>Team Number: </h3>
-            <input type="number" name="general-teamNumber" min="1" max="7331" />
-            <h3>Team Name: </h3>
-            <input type="text" name="general-teamName" />
-            <h3>Matches Against: </h3>
-            <input type="text" name="general-matchesAgainst" placeholder="None" />
-            <h3>Matches Together: </h3>
-            <input type="text" name="general-matchesTogether" placeholder="None" />
-            <h3>Rookie Year: </h3>
-            <input type="number" name="general-rookieYear" min="1997" max="2018" />
-          </td>
-          <td>
-            <h2>Autonomous</h2>
-            <h3>Remarks: </h3>
-            <textarea name="autonomous-remarks" placeholder="None" cols="20" rows="5"></textarea>
-          </td>
-          <td>
-            <h2>Scale</h2>
-            <h3>Possible: </h3>
-            <input type="radio" name="scale-possible" value="Yes" /> <b>Yes</b> <br>
-            <input type="radio" name="scale-possible" value="No" /> <b>No</b>
-            <h3>Remarks: </h3>
-            <textarea name="scale-remarks" placeholder="None" cols="20" rows="5"></textarea>
-          </td>
-          <td>
-            <h2>Climb</h2>
-            <h3>Possible: </h3>
-            <input type="radio" name="climb-possible" value="Yes" /> <b>Yes</b> <br>
-            <input type="radio" name="climb-possible" value="No" /> <b>No</b>
-            <h3>Remarks: </h3>
-            <textarea name="climb-remarks" placeholder="None" cols="20" rows="5"></textarea>
-          </td>
-          <td>
-            <h2>Switch</h2>
-            <h3>Possible: </h3>
-            <input type="radio" name="switch-possible" value="Yes" /> <b>Yes</b> <br>
-            <input type="radio" name="switch-possible" value="No" /> <b>No</b>
-            <h3>Remarks: </h3>
-            <textarea name="switch-remarks" placeholder="None" cols="20" rows="5"></textarea>
-          </td>
-          <td>
-            <h2>Exchange</h2>
-            <h3>Possible: </h3>
-            <input type="radio" name="exchange-possible" value="Yes" /> <b>Yes</b> <br>
-            <input type="radio" name="exchange-possible" value="No" /> <b>No</b>
-            <h3>Remarks: </h3>
-            <textarea name="exchange-remarks" placeholder="None" cols="20" rows="5"></textarea>
-          </td>
-          <td>
-            <h2>Overall</h2>
-            <h3>Rating (1-4): </h3>
-            <input type="number" name="overall-rating" min="1" max="4" />
-            <h3>Remarks: </h3>
-            <textarea name="overall-remarks" placeholder="None" cols="20" rows="5"></textarea>
-          </td>
-        </tr>
-      </table>
+      <div class="input-card">
+        <h2>General</h2>
+        <h3>Team Number: </h3>
+        <input type="number" name="general-teamNumber" min="1" max="7331" />
+        <h3>Team Name: </h3>
+        <input type="text" name="general-teamName" />
+        <h3>Matches Against: </h3>
+        <input type="text" name="general-matchesAgainst" placeholder="None" />
+        <h3>Matches Together: </h3>
+        <input type="text" name="general-matchesTogether" placeholder="None" />
+        <h3>Rookie Year: </h3>
+        <input type="number" name="general-rookieYear" min="1997" max="2018" />
+      </div>
+      <div class="input-card">
+        <h2>Sandstorm</h2>
+        <h3>Control Method (leave blank if robot repeatedly does not move):</h3>
+        <input type="checkbox" name="autonomous-control-auto" value="Autonomous">Autonomous<br>
+        <input type="checkbox" name="autonomous-control-teleop" value="Teleoperated">Teleoperated<br>
+        <input type="checkbox" name="autonomous-control-unsure" value="I Don't Know">I Don't Know
+        <h3>Robot Crosses Auto Line</h3>
+        <input type="radio" name="autonomous-autoline">From Level 1<br>
+        <input type="radio" name="autonomous-autoline">From Level 2<br>
+        <input type="radio" name="autonomous-autoline" checked>No<br>
+        <span>Hatch Panels Placed: </span>
+        <input type="number" name="autonomous-panels" min="0" max="24"><br>
+        <span>Cargo Loaded: </span>
+        <input type="number" name="autonomous-cargo" min="0" max="24">
+        <h3>Remarks: </h3>
+        <textarea name="autonomous-remarks" placeholder="None" cols="20" rows="5"></textarea>
+      </div>
+      <div class="input-card">
+        <h2>Scale</h2>
+        <h3>Possible: </h3>
+        <input type="radio" name="scale-possible" value="Yes" /> <b>Yes</b> <br>
+        <input type="radio" name="scale-possible" value="No" /> <b>No</b>
+        <h3>Remarks: </h3>
+        <textarea name="scale-remarks" placeholder="None" cols="20" rows="5"></textarea>
+      </div>
+      <div class="input-card">
+        <h2>Climb</h2>
+        <h3>Possible: </h3>
+        <input type="radio" name="climb-possible" value="Yes" /> <b>Yes</b> <br>
+        <input type="radio" name="climb-possible" value="No" /> <b>No</b>
+        <h3>Remarks: </h3>
+        <textarea name="climb-remarks" placeholder="None" cols="20" rows="5"></textarea>
+      </div>
+      <div class="input-card">
+        <h2>Switch</h2>
+        <h3>Possible: </h3>
+        <input type="radio" name="switch-possible" value="Yes" /> <b>Yes</b> <br>
+        <input type="radio" name="switch-possible" value="No" /> <b>No</b>
+        <h3>Remarks: </h3>
+        <textarea name="switch-remarks" placeholder="None" cols="20" rows="5"></textarea>
+      </div>
+      <div class="input-card">
+        <h2>Exchange</h2>
+        <h3>Possible: </h3>
+        <input type="radio" name="exchange-possible" value="Yes" /> <b>Yes</b> <br>
+        <input type="radio" name="exchange-possible" value="No" /> <b>No</b>
+        <h3>Remarks: </h3>
+        <textarea name="exchange-remarks" placeholder="None" cols="20" rows="5"></textarea>
+      </div>
+      <div class="input-card">
+        <h2>Overall</h2>
+        <h3>Rating (1-4): </h3>
+        <input type="number" name="overall-rating" min="1" max="4" />
+        <h3>Remarks: </h3>
+        <textarea name="overall-remarks" placeholder="None" cols="20" rows="5"></textarea>
+      </div>
     </form>
     <script>
       var responses = [];
@@ -161,22 +158,22 @@
       <div class="scoutedData">
         <table class="scoutdataTableHead">
           <tr id="tableHead">
-            <td title="FIRST Team Number"><h4>FTN</h4></td>
-            <td><h4>Team Name</h4></td>
-            <td><h4>Matches Against</h4></td>
-            <td><h4>Matches Together</3></td>
-            <td title="FIRST Rookie Year"><h4>FRY</h4></td>
-            <td><h4>Autonomous Remarks</h4></td>
-            <td><h4>Scale?</h4></td>
-            <td><h4>Scale Remarks</h4></td>
-            <td><h4>Climb?</h4></td>
-            <td><h4>Climb Remarks</h4></td>
-            <td><h4>Switch?</h4></td>
-            <td><h4>Switch Remarks</h4></td>
-            <td><h4>Exchange?</h4></td>
-            <td><h4>Exchange Remarks</h4></td>
-            <td title="FIRST Team Rating"><h4>FTR</h4></td>
-            <td><h4>Overall Remarks</h4></td>
+            <td title="FIRST Team Number"><h4>FTN</h4></div>
+            <div class="input-card"><h4>Team Name</h4></div>
+            <div class="input-card"><h4>Matches Against</h4></div>
+            <div class="input-card"><h4>Matches Together</3></div>
+            <td title="FIRST Rookie Year"><h4>FRY</h4></div>
+            <div class="input-card"><h4>Autonomous Remarks</h4></div>
+            <div class="input-card"><h4>Scale?</h4></div>
+            <div class="input-card"><h4>Scale Remarks</h4></div>
+            <div class="input-card"><h4>Climb?</h4></div>
+            <div class="input-card"><h4>Climb Remarks</h4></div>
+            <div class="input-card"><h4>Switch?</h4></div>
+            <div class="input-card"><h4>Switch Remarks</h4></div>
+            <div class="input-card"><h4>Exchange?</h4></div>
+            <div class="input-card"><h4>Exchange Remarks</h4></div>
+            <td title="FIRST Team Rating"><h4>FTR</h4></div>
+            <div class="input-card"><h4>Overall Remarks</h4></div>
           </tr>
         </table>
       </div>

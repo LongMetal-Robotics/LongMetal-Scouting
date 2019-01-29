@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Add Team | LongMetal Scouting v3</title>
+    <title>Add Team | LongMetal Scouting</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap -->
       <!-- Dependencies -->
@@ -56,7 +56,7 @@
           <hr>
           <div class="form-group">
             <label for="general-teamNumber" required>Team Number</label>
-            <input type="number" class="form-control" id="general-teamNumber" placeholder="Ex. 7127">
+            <input type="number" class="form-control" id="general-teamNumber" placeholder="Ex. 7127" min="1" max="7915">
           </div>
           <div class="form-group">
             <label for="general-teamName">Team Name</label>
@@ -69,12 +69,12 @@
           <div class="form-group">
             <label for="general-matches-with">Matches With</label>
             <input type="text" class="form-control" id="general-matches-with" aria-describedby="help-matches-with" placeholder="Ex. Q1, Q2, Q3">
-            <small id="help-matches-with" class="form-text text-muted">Comma Seperated</small>
+            <small id="help-matches-with" class="form-text text-muted">Comma Separated</small>
           </div>
           <div class="form-group">
             <label for="general-matches-against">Matches Against</label>
             <input type="text" class="form-control" id="general-matches-against" aria-describedby="help-matches-against" placeholder="Ex. Q1, Q2, Q3">
-            <small id="help-matches-against" class="form-text text-muted">Comma Seperated</small>
+            <small id="help-matches-against" class="form-text text-muted">Comma Separated</small>
           </div>
 
           <div class="form-group-spacer"></div>
@@ -338,6 +338,6 @@
     <script>
       $('[data-toggle="tooltip"]').tooltip();
     </script>
-    <span class="copyright">&copy; 2019 LongMetal Robotics</span>
+    <span class="copyright">&copy; 2019 LongMetal Robotics | v3.2.0b</span>
   </body>
 </html>

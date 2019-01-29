@@ -3,7 +3,7 @@
 body {
   position: relative;
   min-height: 100vh;
-  padding-bottom: 18px;
+  padding-bottom: 36px;
 }
 
 .material-icon {
@@ -29,6 +29,10 @@ body {
 .list-group {
   margin-bottom: 30px;
   padding-left: 15px;
+}
+
+.load {
+  color: gray;
 }
 
 .toast {

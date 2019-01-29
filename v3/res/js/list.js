@@ -451,9 +451,9 @@ function loadTeams() {
     teamNumbers = snapshot.val();
     if (teamNumbers != null) {
       $('h3').text('');
-
       if (load > teamNumbers.length) {
         load = teamNumbers.length;
+        $('.load').hide();
       }
       for (var i = loaded; i < load; i++) {
         firebase.database().ref('/teams/data/frc' + teamNumbers[i]).once('value').then(function(snapshot) {
@@ -508,21 +508,27 @@ if (!location.pathname.includes("/team")) {
   $('.nav-link[href="javascript:presentJSON()"]')[0].classList.add('disabled');
   $('.nav-link[data-target="#confirm"]')[0].classList.replace('text-danger', 'disabled');
 }
-
+var arr;
 function deleteTeam() {
   firebase.database().ref('/teams/data/' + location.search.match(/frc[0-9]*/)[0]).remove();
   firebase.database().ref('/teams/names/' + location.search.match(/frc[0-9]*/)[0]).remove();
   firebase.database().ref('/teams/numbers/').once('value').then(function(snapshot) {
-    var arr = snapshot.val();
+    arr = snapshot.val();
     if (arr.length > 1) {
-      var arr1 = arr.slice(0, arr.indexOf(location.search.match(/frc[0-9]*/)[0].substr(3)));
-      var arr2 = arr.slice(arr.indexOf(location.search.match(/frc[0-9]*/)[0].substr(3)) + 1, arr.length);
+      var arr1 = arr.slice(0, arr.indexOf(parseInt(location.search.match(/frc[0-9]*/)[0].substr(3))));
+      var arr2 = arr.slice(arr.indexOf(parseInt(location.search.match(/frc[0-9]*/)[0].substr(3))) + 1, arr.length);
       arr = arr1.concat(arr2);
       firebase.database().ref('/teams/numbers/').set(arr);
     } else {
       firebase.database().ref('/teams/numbers/').remove();
     }
+
+    if (arr.length > 1) {
+      var arr1 = [];
+      console.log('arr', arr);
+      console.log('')
+    }
+    $('#confirm').modal('hide');
+    location.assign('../v3');
   });
-  $('#confirm').modal('hide');
-  location.assign('');
 }

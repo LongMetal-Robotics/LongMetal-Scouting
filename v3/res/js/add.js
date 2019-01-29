@@ -176,7 +176,7 @@ function firebaseUpload() {
       scoutedTeams = snapshot.val();
       if (scoutedTeams != null) {
         if (!scoutedTeams.includes(teamNumber)) {
-          scoutedTeams[scoutedTeams.length + 1] = teamNumber;
+          scoutedTeams[scoutedTeams.length] = teamNumber;
           firebase.database().ref('/teams/numbers/').set(scoutedTeams);
         }
       } else {

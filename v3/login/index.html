@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-89311316-6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-89311316-6');
+    </script>
+    <title>Log In | LongMetal Scouting</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="shortcut icon" type="image/png" href="res/img/icons/icon-76.png">
+    <link rel="apple-touch-icon" type="image/png" href="res/img/icons/icon-196.png">
+    <!-- Bootstrap -->
+      <!-- Dependencies -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+      <!-- Core -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Custom Code -->
+      <!-- Style -->
+        <link rel="stylesheet" href="../res/css/main.css">
+    <!--Firebase boilerplate-->
+      <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+      <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+      <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+      <script>
+        function getContinue() {
+          var href = "";
+          try {
+            href = location.search.match(/continue=([a-z]*\/*)*/)[0].substring(9);
+            if (href == "") {
+              href = "account";
+            } else if (href == "home") {
+              href = "";
+            }
+          } catch (e) {
+            href = "account";
+          }
+          return href;
+        }
+        function firebaseInit() {
+          // Initialize Firebase
+          var config = {
+            apiKey: "AIzaSyApKpqihGa0lJJN4WaDPafHtWNPLYxUXgg",
+            authDomain: "frc-team-7127-scouting.firebaseapp.com",
+            databaseURL: "https://frc-team-7127-scouting.firebaseio.com",
+            projectId: "frc-team-7127-scouting",
+            storageBucket: "frc-team-7127-scouting.appspot.com",
+            messagingSenderId: "881060266081"
+          };
+
+          firebase.initializeApp(config);
+        }
+        firebaseInit();
+        var ui = new firebaseui.auth.AuthUI(firebase.auth());
+        var uiConfig = {
+          callbacks: {
+            signInSuccessWithAuthResult: function(authResult, redirectURL) {
+              console.log(authResult.user.uid);
+              var role = "unverified", team = "unknown";
+              if (authResult.user.email.includes('longmeadow.k12.ma.us')) {
+                role = "trusted";
+                team = 7127;
+              }
+              firebase.database().ref('/users/' + authResult.user.uid).once('value').then(function(snapshot) {
+                if (snapshot.val() == null) {
+                  firebase.database().ref('/users/' + authResult.user.uid).set({
+                    "role": role,
+                    "team": team
+                  }).then(function() {
+                    window.location.assign(getContinue());
+                  });
+                } else {
+                  window.location.assign(getContinue());
+                }
+              });
+            },
+            uiShown: function() {
+              $('#loadholder').hide();
+            }
+          },
+          signInFlow: 'popup',
+          signInSuccessUrl: location.href.substr(0, location.href.indexOf('login')),
+          signInOptions: [
+            firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+            firebase.auth.EmailAuthProvider.PROVIDER_ID
+          ]
+        };
+        ui.start('#firebaseui-auth-container', uiConfig);
+      </script>
+    <base href="../">
+  </head>
+  <body>
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <a class="nav-link disabled" href="account/" id="account"><i class="material-icon">account_circle</i> Account</a>
+      </li>
+      <li class="nav-item">
+        <a href="/" class="nav-link">Team List</a>
+      </li>
+      <li class="nav-item">
+        <a href="matches/" class="nav-link">Match List <sup>BETA</sup></a>
+      </li>
+      <li class="nav-item">
+        <a href="add/match/" class="nav-link">Add Match</a>
+      </li>
+    </ul>
+    <div id="firebaseui-auth-container"></div>
+    <h3 id="loadholder">
+          Loading...
+          <br>
+          <div class="spinner-grow text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-primary delay-25" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-primary delay-50" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </h3>
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modal-title">ERROR</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p id="modal-body">An unexpected error has occured. What did you expect from software written by a 15 year old?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+            <button type="button" class="btn btn-primary" onclick="javascript:location.assign('add/match/')">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog" id="teamJSON">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="json-modal-title">ERROR</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p id="json-modal-body">An unexpected error has occured. What did you expect from software written by a 15 year old?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <span class="copyright">&copy; 2019 LongMetal Robotics<span id="version"></span> | <a href="https://goo.gl/forms/haVLwCphI6BwJKtQ2">Send Feedback</a><br>
+    <a href="https://firebase.google.com"><img class="sponsorimg" src="res/img/firebase.png" alt="Built with Firebase" /></a></span>
+    <script src="res/js/js.cookie.js"></script>
+    <script src="res/js/version.js"></script>
+  </body>
+</html>

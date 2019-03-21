@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-89311316-6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-89311316-6');
+    </script>
+    <title>Match Info | LongMetal Scouting</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="shortcut icon" type="image/png" href="res/img/icons/icon-76.png">
+    <link rel="apple-touch-icon" type="image/png" href="res/img/icons/icon-196.png">
+    <!-- Bootstrap -->
+      <!-- Dependencies -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+      <!-- Core -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Custom Code -->
+      <!-- Style -->
+        <link rel="stylesheet" href="../res/css/main.css">
+        <style>
+          form {
+            display: none;
+          }
+        </style>
+    <!--Firebase boilerplate-->
+      <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+      <script>
+        function firebaseInit() {
+          // Initialize Firebase
+          var config = {
+            apiKey: "AIzaSyApKpqihGa0lJJN4WaDPafHtWNPLYxUXgg",
+            authDomain: "frc-team-7127-scouting.firebaseapp.com",
+            databaseURL: "https://frc-team-7127-scouting.firebaseio.com",
+            projectId: "frc-team-7127-scouting",
+            storageBucket: "frc-team-7127-scouting.appspot.com",
+            messagingSenderId: "881060266081"
+          };
+
+          firebase.initializeApp(config);
+        }
+        firebaseInit();
+      </script>
+    <base href="../">
+  </head>
+  <body>
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <a class="nav-link active" href="account/" id="account"><i class="material-icon">account_circle</i> Account</a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">Team List</a>
+      </li>
+      <li class="nav-item">
+        <a href="matches/" class="nav-link">Match List <sup>BETA</sup></a>
+      </li>
+      <li class="nav-item">
+        <a href="add/match/" class="nav-link">Add Match</a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link disabled" data-toggle="modal" data-target="#confirm">Delete</a>
+      </li>
+    </ul>
+    <div class="container" name="team-list">
+      <div class="row justify-content-center" id="team-list">
+        <h2 id="matchNumber"></h2>
+        <h3 id="loadholder">
+          Loading...
+          <br>
+          <div class="spinner-grow text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-primary delay-25" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-primary delay-50" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </h3>
+      </div>
+    </div>
+    <form class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-6">
+          <a name="general"></a>
+          <h2>General</h2>
+          <span>Regular information that should apply to every team</span>
+          <hr>
+          <div class="form-group">
+            <label for="general-teamNumber" required>Team Number</label>
+            <input type="number" class="form-control" id="general-teamNumber" placeholder="Ex. 7127" min="1" max="7915">
+          </div>
+          <div class="form-group">
+            <label for="general-teamName">Team Name</label>
+            <input type="text" class="form-control" id="general-teamName" placeholder="Ex. LongMetal">
+          </div>
+          <div class="form-group">
+            <label for="general-rookieYear">Rookie Year</label>
+            <input type="number" class="form-control" id="general-rookieYear" min="1989" max="2019" placeholder="Ex. 2018">
+          </div>
+          <span id="lastScouted"></span>
+
+          <div class="form-group-spacer"></div>
+          <a name="sandstorm"></a>
+          <h2>Sandstorm</h2>
+          <hr>
+          <h4>Starting</h4> <!-- in JS: undefined, 'cargo', 'hatch' -->
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="auto-load" id="auto-load-1">
+            <label for="auto-load-1" class="form-check-label">With Cargo</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="auto-load" id="auto-load-2">
+            <label for="auto-load-2" class="form-check-label">With Hatch Panel</label>
+          </div>
+          <br>
+          <h4>Control Method</h4> <!-- undefined->stationary, 'auto', 'tele', 'idk' -->
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="auto-control-mode-auto">
+            <label for="auto-control-mode-auto" class="form-check-label">Autonomous</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="auto-control-mode-teleop">
+            <label for="auto-control-mode-teleop" class="form-check-label">Teleoperated</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="auto-control-mode-unknown">
+            <label for="auto-control-mode-auto" class="form-check-label">I Don't Know</label>
+          </div>
+          <small class="form-text text-muted">If robot repeatedly does not move during Sandstorm, do not check. "I Don't Know" overrides all others</small>
+          <br>
+          <h4>Auto Line</h4> <!-- 0->no, 1, 2 -->
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="auto-autoline" id="auto-autoline-1">
+            <label for="auto-autoline-1" class="form-check-label">From Level 1</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="auto-autoline" id="auto-autoline-2">
+            <label for="auto-autoline-2" class="form-check-label">From Level 2</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="auto-autoline" id="auto-autoline-0" checked>
+            <label for="auto-autoline-0" class="form-check-label">No</label>
+          </div>
+          <br>
+          <h4>Rocket</h4> <!-- undefined, 'left', 'right' -->
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="auto-rocket-left">
+            <label for="auto-rocket-left" class="form-check-label">Left</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="auto-rocket-right">
+            <label for="auto-rocket-right" class="form-check-label">Right</label>
+          </div>
+          <br>
+          <h6>Hatch Panels</h6>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="auto-rocket-hatch-3">
+            <label for="auto-rocket-hatch-3" class="form-check-label">Level 3</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="auto-rocket-hatch-2">
+            <label for="auto-rocket-hatch-2" class="form-check-label">Level 2</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="auto-rocket-hatch-1">
+            <label for="auto-rocket-hatch-1" class="form-check-label">Level 1</label>
+          </div>
+          <br>
+          <h6>Cargo</h6>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="auto-rocket-cargo-3">
+            <label for="auto-rocket-cargo-3" class="form-check-label">Level 3</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="auto-rocket-cargo-2">
+            <label for="auto-rocket-cargo-2" class="form-check-label">Level 2</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="auto-rocket-cargo-1">
+            <label for="auto-rocket-cargo-1" class="form-check-label">Level 1</label>
+          </div>
+          <br>
+          <h4>Cargo Ship</h4>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="auto-ship-hatch">
+            <label for="auto-ship-hatch" class="form-check-label">Hatch Panels</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="auto-ship-cargo">
+            <label for="auto-ship-cargo" class="form-check-label">Cargo</label>
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="auto-hatches">Hatch Panels Placed</label>
+            <input type="number" class="form-control" id="auto-hatches" min="0" max="1">
+          </div>
+          <div class="form-group">
+            <label for="auto-cargo">Cargo Loaded</label>
+            <input type="number" class="form-control" id="auto-cargo" min="0" max="24">
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="auto-reload">
+            <label for="auto-reload">Team can reload cargo during Sandstorm</label>
+          </div>
+          <div class="form-group">
+            <label for="auto-remarks">Remarks</label>
+            <textarea class="form-control" id="auto-remarks" rows="3"></textarea>
+          </div>
+          <small class="form-text text-muted">Extra information about Sandstorm period</small>
+
+          <div class="form-group-spacer"></div>
+          <a name="teleop"></a>
+          <h2>Teleoperated</h2>
+          <hr>
+          <h4>Rocket</h4>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="teleop-rocket-left">
+            <label for="teleop-rocket-left" class="form-check-label">Left</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="teleop-rocket-right">
+            <label for="teleop-rocket-right" class="form-check-label">Right</label>
+          </div>
+          <br>
+          <h6>Hatch Panels</h6>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="teleop-rocket-hatch-3">
+            <label for="teleop-rocket-hatch-3" class="form-check-label">Level 3</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="teleop-rocket-hatch-2">
+            <label for="teleop-rocket-hatch-2" class="form-check-label">Level 2</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="teleop-rocket-hatch-1">
+            <label for="teleop-rocket-hatch-1" class="form-check-label">Level 1</label>
+          </div>
+          <br>
+          <h6>Cargo</h6>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="teleop-rocket-cargo-3">
+            <label for="teleop-rocket-cargo-3" class="form-check-label">Level 3</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="teleop-rocket-cargo-2">
+            <label for="teleop-rocket-cargo-2" class="form-check-label">Level 2</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="teleop-rocket-cargo-1">
+            <label for="teleop-rocket-cargo-1" class="form-check-label">Level 1</label>
+          </div>
+          <br>
+          <h4>Cargo Ship</h4>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="teleop-ship-hatch">
+            <label for="teleop-ship-hatch" class="form-check-label">Hatch Panels</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="teleop-ship-cargo">
+            <label for="teleop-ship-cargo" class="form-check-label">Cargo</label>
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="teleop-hatches">Hatch Panels Placed</label>
+            <input type="number" class="form-control" id="teleop-hatches" min="0" max="24">
+          </div>
+          <div class="form-group">
+            <label for="teleop-cargo">Cargo Loaded</label>
+            <input type="number" class="form-control" id="teleop-cargo" min="0" max="24">
+          </div>
+          <h4>Loading</h4>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="teleop-load-depot">
+            <label for="teleop-load-depot">Team can reload from depot</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="teleop-load-zone">
+            <label for="teleop-load-zone">Team can reload from loading zone</label>
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="teleop-remarks">Remarks</label>
+            <textarea class="form-control" id="teleop-remarks" rows="3"></textarea>
+          </div>
+          <small class="form-text text-muted">Extra information about Teleoperated period</small>
+
+          <div class="form-group-spacer"></div>
+          <a name="endgame"></a>
+          <h2>Endgame</h2>
+          <hr>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="endgame-3">
+            <label for="endgame-3" class="form-check-label">Level 3</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="endgame-2">
+            <label for="endgame-2" class="form-check-label">Level 2</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="endgame-1">
+            <label for="endgame-1" class="form-check-label">Level 1</label>
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="endgame-remarks">Remarks</label>
+            <textarea class="form-control" id="endgame-remarks" rows="3"></textarea>
+          </div>
+          <small class="form-text text-muted">Extra information about Endgame period</small>
+
+          <div class="form-group-spacer"></div>
+          <a name="overall"></a>
+          <h2>Overall</h2>
+          <hr>
+          <div class="form-group">
+            <label for="overall-rating">Overall Rating</label>
+            <input type="number" class="form-control" id="overall-rating" min="1" max="4">
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="overall-remarks">Remarks</label>
+            <textarea class="form-control" id="overall-remarks" rows="3"></textarea>
+          </div>
+          <small class="form-text text-muted">Extra information about the team in general</small>
+
+          <div class="form-group-spacer"></div>
+          <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+          <div class="form-group-spacer"></div>
+        </div>
+      </div>
+    </form>
+    <div class="modal fade" tabindex="-1" role="dialog" id="confirm">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="confirm-modal-title">Confirm</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p id="confirm-modal-body">Are you sure you want to delete this team? This action <b>cannot</b> be undone.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-danger" onclick="javascript:deleteTeam()">Continue</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog" id="teamJSON">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="json-modal-title">ERROR</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p id="json-modal-body">An unexpected error has occured. What did you expect from software written by a 15 year old?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <span class="copyright">&copy; 2019 LongMetal Robotics<span id="version"></span> | <a href="https://goo.gl/forms/haVLwCphI6BwJKtQ2">Send Feedback</a><br>
+    <a href="https://firebase.google.com"><img class="sponsorimg" src="res/img/firebase.png" alt="Built with Firebase" /></a></span>
+    <script src="res/js/js.cookie.js"></script>
+    <script src="res/js/version.js"></script>
+    <script src="res/js/add.js"></script>
+    <script src="res/js/list.js"></script>
+    <script src="res/js/account.js"></script>
+    <script>
+      $('[data-toggle="tooltip"]').tooltip();
+    </script>
+  </body>
+</html>
